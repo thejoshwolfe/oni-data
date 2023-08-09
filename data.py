@@ -70,7 +70,70 @@ asteroid_biomes = {
     "Regolith":             ["Barren", "Regolith", "Space"],
 }
 
-all_biomes = set(itertools.chain(*asteroid_biomes.values()))
+biome_resources = {
+    "Aquatic": ["Graphite", "Igneous Rock", "Oxygen", "Carbon Dioxide", "Water"],
+    "Barren": [
+        "Aluminum Ore", "Dirt", "Oxygen", "Carbon Dioxide", "Obsidian", "Igneous Rock", "Iron", "Iron Ore", "Coal", "Granite",
+        "Oxyfern", "Arbor Tree", "Mealwood", "Hexalent", "Mirth Leaf", "Pip",
+    ],
+    "Forest": [
+        "Snow", "Ice", "Polluted Water", "Phosphorite", "Oxylite", "Aluminum Ore", "Water", "Carbon Dioxide", "Dirt", "Oxygen",
+        "Igneous Rock", "Arbor Tree", "Mirth Leaf", "Oxyfern", "Mealwood", "Hexalent", "Shine Bug", "Pip",
+    ],
+    "Jungle": [
+        "Algae", "Sand", "Iron Ore", "Hydrogen", "Bleach Stone", "Sandstone", "Coal", "Chlorine", "Phosphorite", "Igneous Rock",
+        "Balm Lily", "Pincha Pepperplant", "Mirth Leaf", "Morb", "Drecko",
+    ],
+    "Magma": ["Igneous Rock", "Neutronium", "Obsidian", "Magma"],
+    "Marsh": [
+        "Water", "Igneous Rock", "Sand", "Sandstone", "Gold Amalgam", "Polluted Oxygen", "Algae", "Polluted Water", "Clay",
+        "Carbon Dioxide", "Sedimentary Rock", "Slime", "Dusk Cap", "Thimble Reed", "Buddy Bud", "Puft", "Pacu",
+    ],
+    "Metalic": ["Aluminum Ore", "Oxylite", "Cobalt Ore", "Gold Amalgam", "Dirt", "Igneous Rock", "Coal"],
+    "Moo": [
+        "Carbon Dioxide", "Chlorine", "Bleach Stone", "Chlorine (Liquid)", "Granite", "Natural Gas", "Igneous Rock",
+        "Gas Grass", "Gassy Moo",
+    ],
+    "Niobium": ["Obsidian", "Niobium"],
+    "Ocean": [
+        "Brine", "Brine Ice", "Granite", "Hydrogen", "Fossil", "Bleach Stone", "Salt Water", "Sand", "Sedimentary Rock", "Salt",
+        "Carbon Dioxide", "Waterweed", "Pincha Pepperplant", "Pacu", "Pokeshell",
+    ],
+    "Oily": [
+        "Curde Oil (Solid)", "Fossil", "Diamond", "Lead", "Iron Ore", "Crude Oil", "Granite", "Carbon Dioxide", "Igneous Rock",
+        "Jumping Joya", "Sporchid", "Slickster",
+    ],
+    "Radioactive": [
+        "Bleach Stone", "Rust", "Dirt", "Chlorine (Liquid)", "Snow", "Chlorine (Solid)", "Carbon Dioxide (Solid)", "Ice",
+        "Carbon Dioxide", "Sulfur", "Wolframite", "Chlorine", "Uranium Ore", "Wheezewort", "Beeta Hive", "Shine Bug",
+    ],
+    "Regolith": ["Ice", "Oxygen", "Iron Ore", "Rust", "Crushed Ice", "Regolith", "Mafic Rock", "Wheezewort", "Shove Vole"],
+    "Rust": [
+        "Snow", "Iron Ore", "Sour Gas", "Salt Water", "Sulfur", "Brine Ice", "Ethanol", "Salt", "Chlorine", "Carbon Dioxide",
+        "Bleach Stone", "Obsidian", "Mafic Rock", "Rust", "Nosh Sprout", "Dasha Saltvine", "Drecko", "Squeaky Puft",
+    ],
+    "Sandstone": [
+        "Oxylite", "Snow", "Ice", "Phosphorite", "Fertilizer", "Dirt", "Algae", "Coal", "Sand", "Water", "Carbon Dioxide",
+        "Oxygen", "Copper Ore", "Sandstone", "Bristle Blossom", "Bluff Briar", "Mealwood", "Buried Muckroot", "Shine Bug", "Hatch",
+    ],
+    "Space": ["Polluted Ice", "Ice", "Dirt", "Granite", "Regolith", "Mafic Rock", "Copper Ore", "Igneous Rock", "Shove Vole"],
+    "Swampy": [
+        "Phosphorite", "Fertilizer", "Sand", "Fossil", "Carbon Dioxide", "Oxylite", "Polluted Dirt", "Oxygen", "Water", "Dirt",
+        "Mud", "Polluted Mud", "Polluted Water", "Sedimentary Rock", "Cobalt Ore", "Polluted Oxygen", "Mellow Mallow",
+        "Bog Bucket", "Swamp Chard", "Pacu", "Plug Slug",
+    ],
+    "Tundra": [
+        "Carbon Dioxide (Liquid)", "Wolframite", "Oxygen (Liquid)", "Carbon Dioxide (Solid)", "Salt Water", "Igneous Rock",
+        "Rust", "Salt", "Sand", "Brine Ice", "Sandstone", "Carbon Dioxide", "Granite", "Oxygen", "Snow", "Polluted Ice", "Ice",
+        "Sleet Wheat", "Wheezewort",
+    ],
+    "Wasteland": [
+        "Sulfur", "Oxylite", "Sucrose", "Copper Ore", "Mafic Rock", "Oxygen", "Igneous Rock", "Sandstone", "Sand",
+        "Bliss Burst", "Spindly Grubfruit Plant", "Sweetle",
+    ],
+}
+
+all_biomes = set(biome_resources.keys())
 
 def main():
     import argparse
