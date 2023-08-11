@@ -59,8 +59,6 @@
 |{{Pic|48|Chlorine}}{{Pic|48|Hydrogen}}
 |{{Pic|x48|Drecko}}
 |-
-!{{Pic|96|Moo Biome}}<br>[[Moo Biome|Moo]]
-|-
 !{{Pic|96|Niobium Biome}}<br>[[Niobium Biome|Niobium]]
 |{{Pic|48|Niobium}}
 |{{Pic|48|Obsidian}}
@@ -92,8 +90,6 @@
 |{{Pic|48|Liquid Carbon Dioxide}}{{Pic|48|Liquid Chlorine}}
 |{{Pic|48|Carbon Dioxide}}{{Pic|48|Chlorine}}
 |[[File:Beeta (Spaced Out).png|frameless|61x61px]][[File:Shine Bug.png|frameless|62x62px]][[File:Wheezewort.png|frameless|63x63px]]
-|-
-!{{Pic|96|Regolith Biome}}<br>[[Regolith Biome|Regolith]]
 |-
 !{{Pic|96|Rust Biome}}<br>[[Rust Biome|Rust]]
 |{{Pic|48|Iron Ore}}
@@ -144,4 +140,3 @@
 |{{Pic|48|Bliss Burst (Spaced Out)}}{{Pic|48|Grubfruit Plant (Spaced Out)}}{{Pic|48|Spindly Grubfruit Plant (Spaced Out)}}{{Pic|48|Sweetle (Spaced Out)}}
 |-
 |}
-

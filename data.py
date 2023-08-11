@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import itertools
+import itertools, collections
 
 class Starmap:
     def __init__(self, starting_asteroid, *, teleport, short_flight=[]):
@@ -24,11 +24,11 @@ starmaps = [
     Starmap("Terrania",          teleport="Oily Swamp",        short_flight=["Irradiated Forest"]),
     Starmap("Folia",             teleport="Rusty Oil",         short_flight=["Irradiated Swamp"]),
     Starmap("Quagmiris",         teleport="Rusty Oil",         short_flight=["Irradiated Marsh"]),
-    Starmap("Metalic Swampy",    teleport="Frozen Forest",     short_flight=["The Desolands",  "Flipped",       "Radioactive Ocean"]),
-    Starmap("The Desolands",     teleport="Radioactive Ocean", short_flight=["Metalic Swampy", "Frozen Forest", "Flipped"]),
-    Starmap("Frozen Forest",     teleport="The Desolands",     short_flight=["Metalic Swampy", "Flipped",       "Radioactive Ocean"]),
-    Starmap("Flipped",           teleport="The Desolands",     short_flight=["Metalic Swampy", "Frozen Forest", "Radioactive Ocean"]),
-    Starmap("Radioactive Ocean", teleport="Flipped",           short_flight=["Metalic Swampy", "The Desolands", "Frozen Forest"]),
+    Starmap("Metallic Swampy",   teleport="Frozen Forest",     short_flight=["The Desolands",   "Flipped",       "Radioactive Ocean"]),
+    Starmap("The Desolands",     teleport="Radioactive Ocean", short_flight=["Metallic Swampy", "Frozen Forest", "Flipped"]),
+    Starmap("Frozen Forest",     teleport="The Desolands",     short_flight=["Metallic Swampy", "Flipped",       "Radioactive Ocean"]),
+    Starmap("Flipped",           teleport="The Desolands",     short_flight=["Metallic Swampy", "Frozen Forest", "Radioactive Ocean"]),
+    Starmap("Radioactive Ocean", teleport="Flipped",           short_flight=["Metallic Swampy", "The Desolands", "Frozen Forest"]),
 ]
 
 
@@ -57,7 +57,7 @@ asteroid_biomes = {
     "Rusty Oil":            ["Magma", "Ocean", "Oily", "Rust", "Sandstone", "Space"],
     "Quagmiris":            ["Barren", "Jungle", "Magma", "Space", "Swampy", "Tundra", "Wasteland"],
     "Irradiated Marsh":     ["Barren", "Forest", "Marsh", "Metallic", "Radioactive", "Space", "Tundra"],
-    "Metalic Swampy":       ["Magma", "Marsh", "Metallic", "Space", "Swampy"],
+    "Metallic Swampy":      ["Magma", "Marsh", "Metallic", "Space", "Swampy"],
     "The Desolands":        ["Barren", "Jungle", "Oily", "Sandstone", "Space"],
     "Frozen Forest":        ["Jungle", "Forest", "Magma", "Rust", "Space"],
     "Flipped":              ["Magma", "Sandstone", "Space", "Tundra", "Wasteland"],
@@ -71,50 +71,82 @@ asteroid_biomes = {
 }
 
 biome_resources = {
-    "Aquatic": ["Graphite", "Igneous Rock", "Oxygen", "Carbon Dioxide", "Water"],
+    "Aquatic": [
+        # As of version 568201, the in-game wiki gives this pathetic list of resources:
+        #  "Graphite", "Igneous Rock", "Oxygen", "Carbon Dioxide", "Water",
+        # But really we get way more than that:
+        "Carbon Dioxide", "Coal", "Dirt", "Fossil", "Granite", "Graphite", "Igneous Rock", "Lime", "Mafic Rock", "Oxygen",
+        "Oxylite", "Phosphorite", "Sand", "Sandstone", "Sedimentary Rock", "Water",
+    ],
     "Barren": [
         "Aluminum Ore", "Dirt", "Oxygen", "Carbon Dioxide", "Obsidian", "Igneous Rock", "Iron", "Iron Ore", "Coal", "Granite",
-        "Oxyfern", "Arbor Tree", "Mealwood", "Hexalent", "Mirth Leaf", "Pip",
+        # As of version 568201, the in-game wiki gives these additional items, but this is surely a bug:
+        #  "Oxyfern", "Arbor Tree", "Mealwood", "Hexalent", "Mirth Leaf", "Pip",
     ],
     "Forest": [
-        "Snow", "Ice", "Polluted Water", "Phosphorite", "Oxylite", "Aluminum Ore", "Water", "Carbon Dioxide", "Dirt", "Oxygen",
-        "Igneous Rock", "Arbor Tree", "Mirth Leaf", "Oxyfern", "Mealwood", "Hexalent", "Shine Bug", "Pip",
+        "Phosphorite", "Oxylite", "Aluminum Ore", "Water", "Carbon Dioxide", "Dirt", "Oxygen", "Igneous Rock",
+        "Arbor Tree", "Mirth Leaf", "Oxyfern", "Mealwood", "Hexalent", "Shine Bug", "Pip",
+        # As of version 568201, the in-game wiki gives these additional items, but it seems like a bug:
+        #  "Snow", "Ice", "Polluted Water",
     ],
     "Jungle": [
         "Algae", "Sand", "Iron Ore", "Hydrogen", "Bleach Stone", "Sandstone", "Coal", "Chlorine", "Phosphorite", "Igneous Rock",
         "Balm Lily", "Pincha Pepperplant", "Mirth Leaf", "Morb", "Drecko",
     ],
-    "Magma": ["Igneous Rock", "Neutronium", "Obsidian", "Magma"],
-    "Marsh": [
-        "Water", "Igneous Rock", "Sand", "Sandstone", "Gold Amalgam", "Polluted Oxygen", "Algae", "Polluted Water", "Clay",
-        "Carbon Dioxide", "Sedimentary Rock", "Slime", "Dusk Cap", "Thimble Reed", "Buddy Bud", "Puft", "Pacu",
+    "Magma": [
+        "Neutronium", "Obsidian", "Magma",
+        # As of version 568201, the in-game wiki gives this additional item, but it's redundant with Magma:
+        #  "Igneous Rock",
     ],
-    "Metalic": ["Aluminum Ore", "Oxylite", "Cobalt Ore", "Gold Amalgam", "Dirt", "Igneous Rock", "Coal"],
+    "Marsh": [
+        "Igneous Rock", "Sand", "Sandstone", "Gold Amalgam", "Polluted Oxygen", "Algae", "Polluted Water", "Clay",
+        "Carbon Dioxide", "Sedimentary Rock", "Slime", "Dusk Cap", "Thimble Reed", "Buddy Bud", "Puft", "Pacu",
+        # As of version 568201, the in-game wiki gives this additional item, but it appears to be a bug:
+        #  "Water",
+    ],
+    "Metallic": [
+        # As of version 568201, the in-game wiki gives this completely wrong list of resources:
+        #  "Aluminum Ore", "Oxylite", "Cobalt Ore", "Gold Amalgam", "Dirt", "Igneous Rock", "Coal",
+        # Experimentation with a Quagmiris start and exploring the Irradiated Marsh Astroid shows it's more like this:
+        "Aluminum Ore", "Carbon Dioxide", "Coal", "Dirt", "Gold Amalgam", "Igneous Rock", "Oxygen", "Oxylite", "Water",
+        "Arbor Tree", "Hexalent", "Mealwood", "Oxyfern", "Pip", "Shine Bug",
+    ],
     "Moo": [
-        "Carbon Dioxide", "Chlorine", "Bleach Stone", "Chlorine (Liquid)", "Granite", "Natural Gas", "Igneous Rock",
+        "Carbon Dioxide", "Chlorine", "Bleach Stone", "Liquid Chlorine", "Granite", "Natural Gas", "Igneous Rock",
         "Gas Grass", "Gassy Moo",
     ],
     "Niobium": ["Obsidian", "Niobium"],
     "Ocean": [
-        "Brine", "Brine Ice", "Granite", "Hydrogen", "Fossil", "Bleach Stone", "Salt Water", "Sand", "Sedimentary Rock", "Salt",
-        "Carbon Dioxide", "Waterweed", "Pincha Pepperplant", "Pacu", "Pokeshell",
+        "Granite", "Hydrogen", "Fossil", "Bleach Stone", "Salt Water", "Sand", "Sedimentary Rock", "Salt", "Carbon Dioxide",
+        "Waterweed", "Pincha Pepperplant", "Pacu", "Pokeshell",
+        # As of version 568201, the in-game wiki gives these additional items, but it appears to be a bug:
+        #  "Brine", "Brine Ice",
     ],
     "Oily": [
-        "Curde Oil (Solid)", "Fossil", "Diamond", "Lead", "Iron Ore", "Crude Oil", "Granite", "Carbon Dioxide", "Igneous Rock",
-        "Jumping Joya", "Sporchid", "Slickster",
+        "Fossil", "Diamond", "Lead", "Iron Ore", "Crude Oil", "Granite", "Carbon Dioxide", "Igneous Rock",
+        "Jumping Joya", "Sporechid", "Slickster",
+        # As of version 568201, the in-game wiki gives this additional item, but it's not clear why.
+        # Perhaps placing high-mass solid crude oil is how over-pressurized oil pockets are implemented?
+        #  "Solid Crude Oil",
     ],
     "Radioactive": [
-        "Bleach Stone", "Rust", "Dirt", "Chlorine (Liquid)", "Snow", "Chlorine (Solid)", "Carbon Dioxide (Solid)", "Ice",
+        "Bleach Stone", "Rust", "Dirt", "Liquid Chlorine", "Snow", "Solid Chlorine", "Solid Carbon Dioxide", "Ice",
         "Carbon Dioxide", "Sulfur", "Wolframite", "Chlorine", "Uranium Ore", "Wheezewort", "Beeta Hive", "Shine Bug",
+        # As of version 568201, the in-game wiki is missing these additional items:
+        "Liquid Carbon Dioxide",
     ],
     "Regolith": ["Ice", "Oxygen", "Iron Ore", "Rust", "Crushed Ice", "Regolith", "Mafic Rock", "Wheezewort", "Shove Vole"],
     "Rust": [
-        "Snow", "Iron Ore", "Sour Gas", "Salt Water", "Sulfur", "Brine Ice", "Ethanol", "Salt", "Chlorine", "Carbon Dioxide",
-        "Bleach Stone", "Obsidian", "Mafic Rock", "Rust", "Nosh Sprout", "Dasha Saltvine", "Drecko", "Squeaky Puft",
+        "Iron Ore", "Ethanol", "Salt", "Chlorine", "Carbon Dioxide", "Bleach Stone", "Obsidian", "Mafic Rock", "Rust",
+        "Nosh Sprout", "Dasha Saltvine", "Drecko", "Squeaky Puft",
+        # As of version 568201, the in-game wiki gives these additional items, but it appears to be a bug:
+        #  "Snow", "Brine Ice", "Salt Water", "Sour Gas", "Sulfur",
     ],
     "Sandstone": [
-        "Oxylite", "Snow", "Ice", "Phosphorite", "Fertilizer", "Dirt", "Algae", "Coal", "Sand", "Water", "Carbon Dioxide",
-        "Oxygen", "Copper Ore", "Sandstone", "Bristle Blossom", "Bluff Briar", "Mealwood", "Buried Muckroot", "Shine Bug", "Hatch",
+        "Oxylite", "Phosphorite", "Fertilizer", "Dirt", "Algae", "Coal", "Sand", "Water", "Carbon Dioxide", "Oxygen",
+        "Copper Ore", "Sandstone", "Bristle Blossom", "Bluff Briar", "Mealwood", "Buried Muckroot", "Shine Bug", "Hatch",
+        # As of version 568201, the in-game wiki gives these additional items, but it appears to be a bug:
+        #  "Snow", "Ice",
     ],
     "Space": ["Polluted Ice", "Ice", "Dirt", "Granite", "Regolith", "Mafic Rock", "Copper Ore", "Igneous Rock", "Shove Vole"],
     "Swampy": [
@@ -123,7 +155,7 @@ biome_resources = {
         "Bog Bucket", "Swamp Chard", "Pacu", "Plug Slug",
     ],
     "Tundra": [
-        "Carbon Dioxide (Liquid)", "Wolframite", "Oxygen (Liquid)", "Carbon Dioxide (Solid)", "Salt Water", "Igneous Rock",
+        "Liquid Carbon Dioxide", "Wolframite", "Liquid Oxygen", "Solid Carbon Dioxide", "Salt Water", "Igneous Rock",
         "Rust", "Salt", "Sand", "Brine Ice", "Sandstone", "Carbon Dioxide", "Granite", "Oxygen", "Snow", "Polluted Ice", "Ice",
         "Sleet Wheat", "Wheezewort",
     ],
@@ -133,13 +165,132 @@ biome_resources = {
     ],
 }
 
+resource_categories = {
+    "Algae": "Other Solids",
+    "Aluminum Ore": "Metal",
+    "Arbor Tree": "Plants and Critters",
+    "Balm Lily": "Plants and Critters",
+    "Beeta Hive": "Plants and Critters",
+    "Bleach Stone": "Other Solids",
+    "Bliss Burst": "Plants and Critters",
+    "Bluff Briar": "Plants and Critters",
+    "Bog Bucket": "Plants and Critters",
+    "Brine Ice": "Other Solids",
+    "Brine": "Liquid",
+    "Bristle Blossom": "Plants and Critters",
+    "Buddy Bud": "Plants and Critters",
+    "Buried Muckroot": "Plants and Critters",
+    "Carbon Dioxide": "Gases",
+    "Chlorine": "Gases",
+    "Clay": "Other Solids",
+    "Coal": "Other Solids",
+    "Cobalt Ore": "Metal",
+    "Copper Ore": "Metal",
+    "Crude Oil": "Liquid",
+    "Crushed Ice": "Other Solids",
+    "Dasha Saltvine": "Plants and Critters",
+    "Diamond": "Other Solids",
+    "Dirt": "Other Solids",
+    "Drecko": "Plants and Critters",
+    "Dusk Cap": "Plants and Critters",
+    "Ethanol": "Liquid",
+    "Fertilizer": "Other Solids",
+    "Fossil": "Other Solids",
+    "Gas Grass": "Plants and Critters",
+    "Gassy Moo": "Plants and Critters",
+    "Gold Amalgam": "Metal",
+    "Granite": "Rock",
+    "Graphite": "Other Solids",
+    "Hatch": "Plants and Critters",
+    "Hexalent": "Plants and Critters",
+    "Hydrogen": "Gases",
+    "Ice": "Other Solids",
+    "Igneous Rock": "Rock",
+    "Iron": "Metal",
+    "Iron Ore": "Metal",
+    "Jumping Joya": "Plants and Critters",
+    "Lead": "Metal",
+    "Lime": "Other Solids",
+    "Liquid Carbon Dioxide": "Liquid",
+    "Liquid Chlorine": "Liquid",
+    "Liquid Oxygen": "Liquid",
+    "Mafic Rock": "Rock",
+    "Magma": "Liquid",
+    "Mealwood": "Plants and Critters",
+    "Mellow Mallow": "Plants and Critters",
+    "Mirth Leaf": "Plants and Critters",
+    "Morb": "Plants and Critters",
+    "Mud": "Other Solids",
+    "Natural Gas": "Gases",
+    "Neutronium": "Other Solids",
+    "Niobium": "Metal",
+    "Nosh Sprout": "Plants and Critters",
+    "Obsidian": "Rock",
+    "Oxyfern": "Plants and Critters",
+    "Oxygen": "Gases",
+    "Oxylite": "Other Solids",
+    "Pacu": "Plants and Critters",
+    "Phosphorite": "Other Solids",
+    "Pincha Pepperplant": "Plants and Critters",
+    "Pip": "Plants and Critters",
+    "Plug Slug": "Plants and Critters",
+    "Pokeshell": "Plants and Critters",
+    "Polluted Dirt": "Other Solids",
+    "Polluted Ice": "Other Solids",
+    "Polluted Mud": "Other Solids",
+    "Polluted Oxygen": "Gases",
+    "Polluted Water": "Liquid",
+    "Puft": "Plants and Critters",
+    "Regolith": "Other Solids",
+    "Rust": "Other Solids",
+    "Salt": "Other Solids",
+    "Salt Water": "Liquid",
+    "Sand": "Other Solids",
+    "Sandstone": "Rock",
+    "Sedimentary Rock": "Rock",
+    "Shine Bug": "Plants and Critters",
+    "Shove Vole": "Plants and Critters",
+    "Sleet Wheat": "Plants and Critters",
+    "Slickster": "Plants and Critters",
+    "Slime": "Other Solids",
+    "Snow": "Other Solids",
+    "Solid Carbon Dioxide": "Other Solids",
+    "Solid Chlorine": "Other Solids",
+    "Solid Crude Oil": "Other Solids",
+    "Sour Gas": "Gases",
+    "Spindly Grubfruit Plant": "Plants and Critters",
+    "Sporechid": "Plants and Critters",
+    "Squeaky Puft": "Plants and Critters",
+    "Sucrose": "Other Solids",
+    "Sulfur": "Other Solids",
+    "Swamp Chard": "Plants and Critters",
+    "Sweetle": "Plants and Critters",
+    "Thimble Reed": "Plants and Critters",
+    "Uranium Ore": "Metal",
+    "Water": "Liquid",
+    "Waterweed": "Plants and Critters",
+    "Wheezewort": "Plants and Critters",
+    "Wolframite": "Metal",
+}
+
 all_biomes = set(biome_resources.keys())
 
 def main():
     import argparse
     parser = argparse.ArgumentParser()
+    parser.add_argument("command", choices=[
+        "biome-reachability",
+        "biome-resources",
+    ])
     args = parser.parse_args()
 
+    if args.command == "biome-reachability":
+        do_biome_reachability()
+    elif args.command == "biome-resources":
+        do_biome_resources()
+    else: assert False
+
+def do_biome_reachability():
     for starmap in starmaps:
         print("{}:".format(starmap.starting_asteroid))
         seen_biomes = set()
@@ -177,6 +328,47 @@ def main():
                 print("  * {}".format(biome))
 
         print("")
+
+def do_biome_resources():
+    rows = []
+    for biome, resources in biome_resources.items():
+        row = [
+            "!{{Pic|96|%(name)s Biome}}<br>[[%(name)s Biome|%(name)s]]" % {"name": biome},
+        ]
+        categorized = partition(resources, resource_categories.__getitem__)
+        for category in ("Metal", "Rock", "Other Solids", "Liquid", "Gases", "Plants and Critters"):
+            try:
+                items = categorized[category]
+            except KeyError:
+                row.append("|None")
+            else:
+                row.append("|" + "".join(
+                    "{{Pic|%(format)s|%(name)s}}" % {
+                        "name": item,
+                        "format": "x48" if category == "Plants and Critters" else "48",
+                    }
+                    for item in sorted(items)
+                ))
+                del categorized[category] # for assertion
+        assert len(categorized) == 0, "Unrecognized category: " + next(iter(categorized.keys()))
+        row.append("|-")
+        rows.append("\n".join(row))
+
+    print("""\
+== Biomes Contents ==
+{| class="wikitable"
+|-
+! Biome !! Metal !! Rock !! Other Solids !! Liquid !! Gases !! Plants and Critters
+|-
+""" + "\n".join(rows) + """\
+|}
+""", end="")
+
+def partition(items, categorize_fn):
+    result = collections.defaultdict(list)
+    for item in items:
+        result[categorize_fn(item)].append(item)
+    return dict(result)
 
 if __name__ == "__main__":
     main()
