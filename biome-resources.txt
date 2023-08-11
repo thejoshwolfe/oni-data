@@ -6,7 +6,7 @@
 !{{Pic|96|Aquatic Biome}}<br>[[Aquatic Biome|Aquatic]]
 |None
 |{{Pic|48|Granite}}{{Pic|48|Igneous Rock}}{{Pic|48|Mafic Rock}}{{Pic|48|Sandstone}}{{Pic|48|Sedimentary Rock}}
-|{{Pic|48|Coal}}{{Pic|48|Crushed Ice}}{{Pic|48|Dirt}}{{Pic|48|Fossil}}{{Pic|48|Graphite}}{{Pic|48|Ice}}{{Pic|48|Lime}}{{Pic|48|Oxylite}}{{Pic|48|Phosphorite}}{{Pic|48|Sand}}
+|{{Pic|48|Coal}}{{Pic|48|Dirt}}{{Pic|48|Fossil}}{{Pic|48|Graphite}}{{Pic|48|Lime}}{{Pic|48|Oxylite}}{{Pic|48|Phosphorite}}{{Pic|48|Sand}}
 |{{Pic|48|Water}}
 |{{Pic|48|Carbon Dioxide}}{{Pic|48|Oxygen}}
 |None
@@ -33,10 +33,10 @@
 |{{Pic|48|Algae}}{{Pic|48|Bleach Stone}}{{Pic|48|Coal}}{{Pic|48|Phosphorite}}{{Pic|48|Sand}}
 |None
 |{{Pic|48|Chlorine}}{{Pic|48|Hydrogen}}
-|{{Pic|x48|Balm Lily}}{{Pic|x48|Drecko}}{{Pic|x48|Mirth Leaf}}{{Pic|x48|Morb}}{{Pic|x48|Pincha Pepper}}
+|{{Pic|x48|Balm Lily}}{{Pic|x48|Drecko}}{{Pic|x48|Mirth Leaf}}{{Pic|x48|Morb}}{{Pic|x48|Pincha Pepperplant}}
 |-
 !{{Pic|96|Magma Biome}}<br>[[Magma Biome|Magma]]
-|[[File:Niobium.png|50x50px]]
+|None
 |{{Pic|48|Obsidian}}
 |{{Pic|48|Neutronium}}
 |{{Pic|48|Magma}}
@@ -52,12 +52,20 @@
 |{{Pic|x48|Buddy Bud}}{{Pic|x48|Dusk Cap}}{{Pic|x48|Pacu}}{{Pic|x48|Puft}}{{Pic|x48|Thimble Reed}}
 |-
 !{{Pic|96|Metallic Biome}}<br>[[Metallic Biome|Metallic]]
-|{{Pic|48|Aluminum Ore}}{{Pic|48|Copper Ore}}{{Pic|48|Gold Amalgam}}
+|{{Pic|48|Aluminum Ore}}{{Pic|48|Gold Amalgam}}
 |{{Pic|48|Igneous Rock}}
 |{{Pic|48|Coal}}{{Pic|48|Dirt}}{{Pic|48|Oxylite}}
 |{{Pic|48|Water}}
-|{{Pic|48|Chlorine}}{{Pic|48|Hydrogen}}
-|{{Pic|x48|Drecko}}
+|{{Pic|48|Carbon Dioxide}}{{Pic|48|Oxygen}}
+|{{Pic|x48|Arbor Tree}}{{Pic|x48|Hexalent}}{{Pic|x48|Mealwood}}{{Pic|x48|Oxyfern}}{{Pic|x48|Pip}}{{Pic|x48|Shine Bug}}
+|-
+!{{Pic|96|Moo Biome}}<br>[[Moo Biome|Moo]]
+|None
+|{{Pic|48|Granite}}{{Pic|48|Igneous Rock}}
+|{{Pic|48|Bleach Stone}}
+|{{Pic|48|Liquid Chlorine}}
+|{{Pic|48|Carbon Dioxide}}{{Pic|48|Chlorine}}{{Pic|48|Natural Gas}}
+|{{Pic|x48|Gas Grass}}{{Pic|x48|Gassy Moo}}
 |-
 !{{Pic|96|Niobium Biome}}<br>[[Niobium Biome|Niobium]]
 |{{Pic|48|Niobium}}
@@ -73,7 +81,7 @@
 |{{Pic|48|Bleach Stone}}{{Pic|48|Fossil}}{{Pic|48|Salt}}{{Pic|48|Sand}}
 |{{Pic|48|Salt Water}}
 |{{Pic|48|Carbon Dioxide}}{{Pic|48|Hydrogen}}
-|{{Pic|x48|Pacu}}{{Pic|x48|Pincha Pepper}}{{Pic|x48|Pokeshell}}{{Pic|x48|Waterweed}}
+|{{Pic|x48|Pacu}}{{Pic|x48|Pincha Pepperplant}}{{Pic|x48|Pokeshell}}{{Pic|x48|Waterweed}}
 |-
 !{{Pic|96|Oily Biome}}<br>[[Oily Biome|Oily]]
 |{{Pic|48|Iron Ore}}{{Pic|48|Lead}}
@@ -86,10 +94,18 @@
 !{{Pic|96|Radioactive Biome}}<br>[[Radioactive Biome|Radioactive]]
 |{{Pic|48|Uranium Ore}}{{Pic|48|Wolframite}}
 |None
-|{{Pic|48|Bleach Stone}}{{Pic|48|Dirt}}{{Pic|48|Rust}}{{Pic|48|Solid Carbon Dioxide}}{{Pic|48|Solid Chlorine}}{{Pic|48|Sulfur}}
+|{{Pic|48|Bleach Stone}}{{Pic|48|Dirt}}{{Pic|48|Ice}}{{Pic|48|Rust}}{{Pic|48|Snow}}{{Pic|48|Solid Carbon Dioxide}}{{Pic|48|Solid Chlorine}}{{Pic|48|Sulfur}}
 |{{Pic|48|Liquid Carbon Dioxide}}{{Pic|48|Liquid Chlorine}}
 |{{Pic|48|Carbon Dioxide}}{{Pic|48|Chlorine}}
-|[[File:Beeta (Spaced Out).png|frameless|61x61px]][[File:Shine Bug.png|frameless|62x62px]][[File:Wheezewort.png|frameless|63x63px]]
+|{{Pic|x48|Beeta}}{{Pic|x48|Shine Bug}}{{Pic|x48|Wheezewort}}
+|-
+!{{Pic|96|Regolith Biome}}<br>[[Regolith Biome|Regolith]]
+|{{Pic|48|Iron Ore}}
+|{{Pic|48|Mafic Rock}}
+|{{Pic|48|Crushed Ice}}{{Pic|48|Ice}}{{Pic|48|Regolith}}{{Pic|48|Rust}}
+|None
+|{{Pic|48|Oxygen}}
+|{{Pic|x48|Shove Vole}}{{Pic|x48|Wheezewort}}
 |-
 !{{Pic|96|Rust Biome}}<br>[[Rust Biome|Rust]]
 |{{Pic|48|Iron Ore}}
@@ -97,9 +113,9 @@
 |{{Pic|48|Bleach Stone}}{{Pic|48|Rust}}{{Pic|48|Salt}}
 |{{Pic|48|Ethanol}}
 |{{Pic|48|Carbon Dioxide}}{{Pic|48|Chlorine}}
-|{{Pic|48|Dasha Saltvine}}{{Pic|48|Nosh Sprout}}
+|{{Pic|x48|Dasha Saltvine}}{{Pic|x48|Drecko}}{{Pic|x48|Nosh Sprout}}{{Pic|x48|Squeaky Puft}}
 |-
-!{{Pic|96|Sandstone Biome}}<br>[[Temperate Biome|Temperate]]
+!{{Pic|96|Sandstone Biome}}<br>[[Sandstone Biome|Sandstone]]
 |{{Pic|48|Copper Ore}}
 |{{Pic|48|Sandstone}}
 |{{Pic|48|Algae}}{{Pic|48|Coal}}{{Pic|48|Dirt}}{{Pic|48|Fertilizer}}{{Pic|48|Oxylite}}{{Pic|48|Phosphorite}}{{Pic|48|Sand}}
@@ -108,35 +124,35 @@
 |{{Pic|x48|Bluff Briar}}{{Pic|x48|Bristle Blossom}}{{Pic|x48|Buried Muckroot}}{{Pic|x48|Hatch}}{{Pic|x48|Mealwood}}{{Pic|x48|Shine Bug}}
 |-
 !{{Pic|96|Space Biome}}<br>[[Space Biome|Space]]
-|None
+|{{Pic|48|Copper Ore}}
 |{{Pic|48|Granite}}{{Pic|48|Igneous Rock}}{{Pic|48|Mafic Rock}}
-|{{Pic|48|Ice}}{{Pic|48|Polluted Ice}}{{Pic|48|Regolith}}
+|{{Pic|48|Dirt}}{{Pic|48|Ice}}{{Pic|48|Polluted Ice}}{{Pic|48|Regolith}}
 |None
 |None
-|{{Pic|x48|Shove Vole}}{{Pic|x48|Ionizing Bug (Spaced Out)}}
+|{{Pic|x48|Shove Vole}}
 |-
 !{{Pic|96|Swampy Biome}}<br>[[Swampy Biome|Swampy]]
-|{{Pic|48|Cobalt Ore (Spaced Out)}}
+|{{Pic|48|Cobalt Ore}}
 |{{Pic|48|Sedimentary Rock}}
-|{{Pic|48|Dirt}}{{Pic|48|Fertilizer}}{{Pic|48|Fossil}}{{Pic|48|Mud (Spaced Out)}}{{Pic|48|Oxylite}}{{Pic|48|Phosphorite}}{{Pic|48|Polluted Dirt}}{{Pic|48|Polluted Mud (Spaced Out)}}{{Pic|48|Sand}}
+|{{Pic|48|Dirt}}{{Pic|48|Fertilizer}}{{Pic|48|Fossil}}{{Pic|48|Mud}}{{Pic|48|Oxylite}}{{Pic|48|Phosphorite}}{{Pic|48|Polluted Dirt}}{{Pic|48|Polluted Mud}}{{Pic|48|Sand}}
 |{{Pic|48|Polluted Water}}{{Pic|48|Water}}
-|{{Pic|x48|Carbon Dioxide}}{{Pic|x48|Oxygen}}{{Pic|x48|Polluted Oxygen}}
-|{{Pic|x48|Bog Bucket (Spaced Out)}}{{Pic|x48|Mellow Mallow (Spaced Out)}}{{Pic|x48|Pacu}}{{Pic|x48|Plug Slug (Spaced Out)}}{{Pic|x48|Swamp Chard (Spaced Out)}}
+|{{Pic|48|Carbon Dioxide}}{{Pic|48|Oxygen}}{{Pic|48|Polluted Oxygen}}
+|{{Pic|x48|Bog Bucket}}{{Pic|x48|Mellow Mallow}}{{Pic|x48|Pacu}}{{Pic|x48|Plug Slug}}{{Pic|x48|Swamp Chard}}
 |-
 !{{Pic|96|Tundra Biome}}<br>[[Tundra Biome|Tundra]]
-|{{Pic|48|Wolframite|Wolframite}}
+|{{Pic|48|Wolframite}}
 |{{Pic|48|Granite}}{{Pic|48|Igneous Rock}}{{Pic|48|Sandstone}}
 |{{Pic|48|Brine Ice}}{{Pic|48|Ice}}{{Pic|48|Polluted Ice}}{{Pic|48|Rust}}{{Pic|48|Salt}}{{Pic|48|Sand}}{{Pic|48|Snow}}{{Pic|48|Solid Carbon Dioxide}}
-|{{Pic|48|Liquid Oxygen}}{{Pic|48|Salt Water}}
+|{{Pic|48|Liquid Carbon Dioxide}}{{Pic|48|Liquid Oxygen}}{{Pic|48|Salt Water}}
 |{{Pic|48|Carbon Dioxide}}{{Pic|48|Oxygen}}
 |{{Pic|x48|Sleet Wheat}}{{Pic|x48|Wheezewort}}
 |-
 !{{Pic|96|Wasteland Biome}}<br>[[Wasteland Biome|Wasteland]]
 |{{Pic|48|Copper Ore}}
 |{{Pic|48|Igneous Rock}}{{Pic|48|Mafic Rock}}{{Pic|48|Sandstone}}
-|{{Pic|48|Oxylite}}{{Pic|48|Sand}}{{Pic|48|Sucrose (Spaced Out)}}{{Pic|48|Sulfur}}
-|[[File:Water.png|frameless|48x48px]]
-|[[File:Carbon Dioxide.png|frameless|53x53px]]{{Pic|48|Oxygen}}
-|{{Pic|48|Bliss Burst (Spaced Out)}}{{Pic|48|Grubfruit Plant (Spaced Out)}}{{Pic|48|Spindly Grubfruit Plant (Spaced Out)}}{{Pic|48|Sweetle (Spaced Out)}}
-|-
-|}
+|{{Pic|48|Oxylite}}{{Pic|48|Sand}}{{Pic|48|Sucrose}}{{Pic|48|Sulfur}}
+|None
+|{{Pic|48|Oxygen}}
+|{{Pic|x48|Bliss Burst}}{{Pic|x48|Spindly Grubfruit Plant}}{{Pic|x48|Sweetle}}
+|-|}
+*This table was generated from [this script](https://github.com/thejoshwolfe/oni-data).*
