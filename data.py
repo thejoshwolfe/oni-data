@@ -166,6 +166,7 @@ biome_resources = {
     ],
 }
 
+category_names = ["Metal", "Rock", "Other Solids", "Liquid", "Gases", "Plants and Critters"]
 resource_categories = {
     "Algae": "Other Solids",
     "Aluminum Ore": "Metal",
@@ -177,7 +178,7 @@ resource_categories = {
     "Bluff Briar": "Plants and Critters",
     "Bog Bucket": "Plants and Critters",
     "Brine Ice": "Other Solids",
-    "Brine": "Liquid",
+    #"Brine": "Liquid",
     "Bristle Blossom": "Plants and Critters",
     "Buddy Bud": "Plants and Critters",
     "Buried Muckroot": "Plants and Critters",
@@ -257,8 +258,8 @@ resource_categories = {
     "Snow": "Other Solids",
     "Solid Carbon Dioxide": "Other Solids",
     "Solid Chlorine": "Other Solids",
-    "Solid Crude Oil": "Other Solids",
-    "Sour Gas": "Gases",
+    #"Solid Crude Oil": "Other Solids",
+    #"Sour Gas": "Gases",
     "Spindly Grubfruit Plant": "Plants and Critters",
     "Sporechid": "Plants and Critters",
     "Squeaky Puft": "Plants and Critters",
@@ -274,14 +275,13 @@ resource_categories = {
     "Wolframite": "Metal",
 }
 
-all_biomes = set(biome_resources.keys())
-
 def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=[
         "biome-reachability",
         "biome-resources",
+        "resource-reachability",
     ])
     args = parser.parse_args()
 
@@ -289,6 +289,8 @@ def main():
         do_biome_reachability()
     elif args.command == "biome-resources":
         do_biome_resources()
+    elif args.command == "resource-reachability":
+        do_resource_reachability()
     else: assert False
 
 def do_biome_reachability():
@@ -322,11 +324,53 @@ def do_biome_reachability():
             if is_new(biome):
                 print("  * {}".format(biome))
 
-        missing_biomes = all_biomes - seen_biomes
+        missing_biomes = set(biome_resources.keys()) - seen_biomes
         if missing_biomes:
             print("  Missing Biomes:")
             for biome in sorted(missing_biomes):
                 print("  * {}".format(biome))
+
+        print("")
+
+def do_resource_reachability():
+    for starmap in starmaps:
+        print("{}:".format(starmap.starting_asteroid))
+        seen_resources = set()
+        def resources_for_biomes(biomes):
+            resources = []
+            for biome in biomes:
+                for resource in biome_resources[biome]:
+                    if resource in seen_resources: continue
+                    seen_resources.add(resource)
+                    resources.append(resource)
+            resources.sort(key=lambda resource: (category_names.index(resource_categories[resource]), resource))
+            return resources
+
+        print("  Starting Resources:")
+        for resource in resources_for_biomes(asteroid_biomes[starmap.starting_asteroid]):
+            print("  * {}".format(resource))
+
+        print("  Teleport Resources:")
+        for resource in resources_for_biomes(asteroid_biomes[starmap.teleport]):
+            print("  * {}".format(resource))
+
+        short_flight_resources = resources_for_biomes(itertools.chain(*(
+            asteroid_biomes[asteroid] for asteroid in starmap.short_flight
+        )))
+        if short_flight_resources:
+            print("  Short Flight Resources:")
+            for resource in short_flight_resources:
+                print("  * {}".format(resource))
+
+        print("  Long Flight Resources:")
+        for resource in resources_for_biomes(itertools.chain(*(asteroid_biomes[asteroid] for asteroid in starmap.long_flight))):
+            print("  * {}".format(resource))
+
+        missing_resources = set(resource_categories.keys()) - seen_resources
+        if missing_resources:
+            print("  Missing Resources:")
+            for resource in sorted(missing_resources):
+                print("  * {}".format(resource))
 
         print("")
 
@@ -337,7 +381,7 @@ def do_biome_resources():
             "!{{Pic|96|%(name)s Biome}}<br>[[%(name)s Biome|%(name)s]]" % {"name": biome},
         ]
         categorized = partition(resources, resource_categories.__getitem__)
-        for category in ("Metal", "Rock", "Other Solids", "Liquid", "Gases", "Plants and Critters"):
+        for category in category_names:
             try:
                 items = categorized[category]
             except KeyError:
