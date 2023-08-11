@@ -131,9 +131,10 @@ biome_resources = {
     ],
     "Radioactive": [
         "Bleach Stone", "Rust", "Dirt", "Liquid Chlorine", "Snow", "Solid Chlorine", "Solid Carbon Dioxide", "Ice",
-        "Carbon Dioxide", "Sulfur", "Wolframite", "Chlorine", "Uranium Ore", "Wheezewort", "Beeta Hive", "Shine Bug",
+        "Carbon Dioxide", "Sulfur", "Wolframite", "Chlorine", "Uranium Ore", "Wheezewort", "Beeta", "Shine Bug",
         # As of version 568201, the in-game wiki is missing these additional items:
         "Liquid Carbon Dioxide",
+        # Note the in-game wiki lists Beeta Hive, but here we use Beeta because it looks nicer.
     ],
     "Regolith": ["Ice", "Oxygen", "Iron Ore", "Rust", "Crushed Ice", "Regolith", "Mafic Rock", "Wheezewort", "Shove Vole"],
     "Rust": [
@@ -170,7 +171,7 @@ resource_categories = {
     "Aluminum Ore": "Metal",
     "Arbor Tree": "Plants and Critters",
     "Balm Lily": "Plants and Critters",
-    "Beeta Hive": "Plants and Critters",
+    "Beeta": "Plants and Critters",
     "Bleach Stone": "Other Solids",
     "Bliss Burst": "Plants and Critters",
     "Bluff Briar": "Plants and Critters",
@@ -362,6 +363,7 @@ def do_biome_resources():
 |-
 """ + "\n".join(rows) + """\
 |}
+*This table was generated from [this script](https://github.com/thejoshwolfe/oni-data).*
 """, end="")
 
 def partition(items, categorize_fn):
