@@ -361,9 +361,9 @@ def do_biome_resources():
 |-
 ! Biome !! Metal !! Rock !! Other Solids !! Liquid !! Gases !! Plants and Critters
 |-
-""" + "\n".join(rows) + """\
+""" + "\n".join(rows) + """
 |}
-*This table was generated from [this script](https://github.com/thejoshwolfe/oni-data).*
+''This table was generated from [https://github.com/thejoshwolfe/oni-data this script].''
 """, end="")
 
 def partition(items, categorize_fn):
