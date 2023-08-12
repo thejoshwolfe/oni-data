@@ -447,7 +447,7 @@ def do_interesting_things():
 
 interesting_resources = {
     "Gold", "Gold Amalgam", # For Oxylite, Super Coolant, pumping hot oil, etc.
-    "Fossil", "Lime", "Iron Ore", # For Steel
+    "Fossil", "Lime", "Iron Ore", "Rust", # For Steel
     "Graphite", "Niobium", "Gas Grass", "Gassy Moo", # Space resources
     "Crude Oil", # For Plastic
     "Drecko", # For Plastic and Reed Fiber
