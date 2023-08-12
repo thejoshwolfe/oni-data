@@ -3,7 +3,8 @@
 import itertools, collections
 
 class Starmap:
-    def __init__(self, starting_asteroid, *, teleport, short_flight=[]):
+    def __init__(self, category, starting_asteroid, *, teleport, short_flight=[]):
+        self.category = category
         self.starting_asteroid = starting_asteroid
         self.teleport = teleport
         self.short_flight = short_flight
@@ -11,25 +12,48 @@ class Starmap:
 
 outer_asteroids = ["Tundra", "Marshy", "Moo", "Water", "Superconductive", "Regolith"]
 starmaps = [
-    Starmap("Terra",             teleport="Radioactive Swamp"),
-    Starmap("Oceania",           teleport="Glowood Wasteland"),
-    Starmap("Squelchy",          teleport="Radioactive Forest"),
-    Starmap("Rime",              teleport="Stinko Swamp"),
-    Starmap("Verdante",          teleport="Radioactive Terra"),
-    Starmap("Arboria",           teleport="Radioactive Terra"),
-    Starmap("Volcanea",          teleport="Radioactive Swamp"),
-    Starmap("The Badlands",      teleport="Radioactive Swamp"),
-    Starmap("Aridio",            teleport="Radioactive Terrabog"),
-    Starmap("Oasisse",           teleport="Radioactive Swamp"),
-    Starmap("Terrania",          teleport="Oily Swamp",        short_flight=["Irradiated Forest"]),
-    Starmap("Folia",             teleport="Rusty Oil",         short_flight=["Irradiated Swamp"]),
-    Starmap("Quagmiris",         teleport="Rusty Oil",         short_flight=["Irradiated Marsh"]),
-    Starmap("Metallic Swampy",   teleport="Frozen Forest",     short_flight=["The Desolands",   "Flipped",       "Radioactive Ocean"]),
-    Starmap("The Desolands",     teleport="Radioactive Ocean", short_flight=["Metallic Swampy", "Frozen Forest", "Flipped"]),
-    Starmap("Frozen Forest",     teleport="The Desolands",     short_flight=["Metallic Swampy", "Flipped",       "Radioactive Ocean"]),
-    Starmap("Flipped",           teleport="The Desolands",     short_flight=["Metallic Swampy", "Frozen Forest", "Radioactive Ocean"]),
-    Starmap("Radioactive Ocean", teleport="Flipped",           short_flight=["Metallic Swampy", "The Desolands", "Frozen Forest"]),
+    Starmap("Classic",     "Terra",             teleport="Radioactive Swamp"),
+    Starmap("Classic",     "Oceania",           teleport="Glowood Wasteland"),
+    Starmap("Classic",     "Squelchy",          teleport="Radioactive Forest"),
+    Starmap("Classic",     "Rime",              teleport="Stinko Swamp"),
+    Starmap("Classic",     "Verdante",          teleport="Radioactive Terra"),
+    Starmap("Classic",     "Arboria",           teleport="Radioactive Terra"),
+    Starmap("Classic",     "Volcanea",          teleport="Radioactive Swamp"),
+    Starmap("Classic",     "The Badlands",      teleport="Radioactive Swamp"),
+    Starmap("Classic",     "Aridio",            teleport="Radioactive Terrabog"),
+    Starmap("Classic",     "Oasisse",           teleport="Radioactive Swamp"),
+    Starmap("Spaced Out!", "Terrania",          teleport="Oily Swamp",        short_flight=["Irradiated Forest"]),
+    Starmap("Spaced Out!", "Folia",             teleport="Rusty Oil",         short_flight=["Irradiated Swamp"]),
+    Starmap("Spaced Out!", "Quagmiris",         teleport="Rusty Oil",         short_flight=["Irradiated Marsh"]),
+    Starmap("Spaced Out!", "Metallic Swampy",   teleport="Frozen Forest",     short_flight=["The Desolands",   "Flipped",       "Radioactive Ocean"]),
+    Starmap("Spaced Out!", "The Desolands",     teleport="Radioactive Ocean", short_flight=["Metallic Swampy", "Frozen Forest", "Flipped"]),
+    Starmap("Spaced Out!", "Frozen Forest",     teleport="The Desolands",     short_flight=["Metallic Swampy", "Flipped",       "Radioactive Ocean"]),
+    Starmap("Spaced Out!", "Flipped",           teleport="The Desolands",     short_flight=["Metallic Swampy", "Frozen Forest", "Radioactive Ocean"]),
+    Starmap("Spaced Out!", "Radioactive Ocean", teleport="Flipped",           short_flight=["Metallic Swampy", "The Desolands", "Frozen Forest"]),
+    Starmap("The Lab",     "Skewed",            teleport="Radioactive Swamp"),
 ]
+
+starting_asteroid_images = {
+    "Terra": "[[File:Terra Asteroid.png|center|40x40px|link=Terra]]",
+    "Oceania": "[[File:Oceania Asteroid (Spaced Out).png|center|42x42px|link=Oceania]]",
+    "Squelchy": "[[File:Squelchy Asteroid.png|center|48x48px|link=Squelchy Asteroid]]",
+    "Rime": "[[File:Rime Asteroid (Spaced Out).png|center|40x40px|link=Rime]]",
+    "Verdante": "[[File:Verdante Asteroid (Spaced Out).png|center|43x43px|link=Verdante]]",
+    "Arboria": "[[File:Arboria Asteroid (Spaced Out).png|center|48x48px|link=Arboria]]",
+    "Volcanea": "[[File:Volcanea Asteroid (Spaced Out).png|center|40x40px|link=Volcanea]]",
+    "The Badlands": "[[File:The Badlands Asteroid (Spaced Out).png|center|40x40px|link=The Badlands]]",
+    "Aridio": "[[File:Aridio Asteroid (Spaced Out).png|center|40x40px|link=Aridio]]",
+    "Oasisse": "[[File:Oassise Asteroid (Spaced Out).png|center|47x47px|link=Oasisse]]",
+    "Terrania": "[[File:Sandstone Asteroid.png|link=Terrania Asteroid|center|41x41px]]",
+    "Folia": "[[File:Forest Moonlet.png|link=Folia Asteroid|center|40x40px]]",
+    "Quagmiris": "[[File:Swampy Asteroid.png|link=Quagmiris Asteroid|center|41x41px]]",
+    "Metallic Swampy": "[[File:metallic_swampy_asteroid.png|link=Metallic Swampy Asteroid|center|40x40px]]",
+    "The Desolands": "[[File:the_desolands_asteroid.png|link=The Desolands Asteroid|center|48x48px]]",
+    "Frozen Forest": "[[file:frozen_forest_asteroid.png|link=Frozen Forest Asteroid|center|43x43px]]",
+    "Flipped": "[[file:flipped_asteroid.png|link=Flipped Asteroid|center|40x40px]]",
+    "Radioactive Ocean": "[[file:radioactive_ocean_asteroid.png|link=Radioactive Ocean Asteroid|center|42x42px]]",
+    "Skewed": "[[File:Skewed Asteroid.png|center|47x47px|link=Skewed Asteroid]]",
+}
 
 
 asteroid_biomes = {
@@ -62,6 +86,7 @@ asteroid_biomes = {
     "Frozen Forest":        ["Jungle", "Forest", "Magma", "Rust", "Space"],
     "Flipped":              ["Magma", "Sandstone", "Space", "Tundra", "Wasteland"],
     "Radioactive Ocean":    ["Forest", "Magma", "Ocean", "Radioactive", "Space"],
+    "Skewed":               ["Sandstone", "Jungle", "Marsh", "Jungle", "Tundra", "Ocean", "Magma", "Oily", "Space"],
     "Tundra":               ["Space", "Tundra"],
     "Marshy":               ["Jungle", "Magma", "Marsh", "Space"],
     "Moo":                  ["Moo", "Space"],
@@ -282,7 +307,9 @@ def main():
         "biome-reachability",
         "biome-resources",
         "resource-reachability",
+        "interesting-things",
     ])
+    parser.add_argument("--all", action="store_true")
     args = parser.parse_args()
 
     if args.command == "biome-reachability":
@@ -290,7 +317,9 @@ def main():
     elif args.command == "biome-resources":
         do_biome_resources()
     elif args.command == "resource-reachability":
-        do_resource_reachability()
+        do_resource_reachability(not args.all)
+    elif args.command == "interesting-things":
+        do_interesting_things()
     else: assert False
 
 def do_biome_reachability():
@@ -332,47 +361,110 @@ def do_biome_reachability():
 
         print("")
 
-def do_resource_reachability():
-    for starmap in starmaps:
-        print("{}:".format(starmap.starting_asteroid))
-        seen_resources = set()
-        def resources_for_biomes(biomes):
-            resources = []
-            for biome in biomes:
-                for resource in biome_resources[biome]:
-                    if resource in seen_resources: continue
-                    seen_resources.add(resource)
-                    resources.append(resource)
+def do_resource_reachability(just_interesting):
+    rows = []
+    for starmap, tiers in compute_rsource_reachability():
+        row = [
+            "!%(image)s [[%(name)s Asteroid|%(name)s]]<br>''(%(category)s)''" % {
+                "image": starting_asteroid_images[starmap.starting_asteroid],
+                "name": starmap.starting_asteroid,
+                "category": starmap.category,
+            },
+        ]
+        for tier_name, resources in tiers:
+            if just_interesting:
+                resources = [resource for resource in resources if resource in interesting_resources]
             resources.sort(key=lambda resource: (category_names.index(resource_categories[resource]), resource))
-            return resources
+            if not resources:
+                row.append("|None")
+            else:
+                row.append("|" + "".join(
+                    "{{Pic|%(format)s|%(name)s}}" % {
+                        "name": resource,
+                        "format": "x48" if resource_categories[resource] == "Plants and Critters" else "48",
+                    }
+                    for resource in resources
+                ))
+        rows.append(row)
 
-        print("  Starting Resources:")
-        for resource in resources_for_biomes(asteroid_biomes[starmap.starting_asteroid]):
-            print("  * {}".format(resource))
+    vertically_join_cells(rows)
 
-        print("  Teleport Resources:")
-        for resource in resources_for_biomes(asteroid_biomes[starmap.teleport]):
-            print("  * {}".format(resource))
+    print("""\
+=== Resource Reachability ===
+{| class="wikitable" style="text-align: center;"
+!Scenario
+!Starting Asteroid
+!Reachable via Teleporter
+!Reachable via Short Rocket Trip
+!Reachable via Long Rocket Trip
+!Unreachable
+|-
+""" + "".join("\n".join(row) + "\n|-\n" for row in rows) + """|}
+''This table was generated from [https://github.com/thejoshwolfe/oni-data this script].''
+""", end="")
 
-        short_flight_resources = resources_for_biomes(itertools.chain(*(
-            asteroid_biomes[asteroid] for asteroid in starmap.short_flight
-        )))
-        if short_flight_resources:
-            print("  Short Flight Resources:")
-            for resource in short_flight_resources:
-                print("  * {}".format(resource))
+def compute_rsource_reachability():
+    results = []
+    for starmap in starmaps:
+        tiers = []
+        seen_resources = set()
+        for tier_name, tier_asteroids in get_reachability_tiers(starmap):
+            resources = []
+            for asteroid in tier_asteroids:
+                for biome in asteroid_biomes[asteroid]:
+                    for resource in biome_resources[biome]:
+                        if resource in seen_resources: continue
+                        seen_resources.add(resource)
+                        resources.append(resource)
+            tiers.append((tier_name, resources))
 
-        print("  Long Flight Resources:")
-        for resource in resources_for_biomes(itertools.chain(*(asteroid_biomes[asteroid] for asteroid in starmap.long_flight))):
-            print("  * {}".format(resource))
+        missing_resources = list(sorted(set(resource_categories.keys()) - seen_resources))
+        tiers.append(("Missing", missing_resources))
 
-        missing_resources = set(resource_categories.keys()) - seen_resources
-        if missing_resources:
-            print("  Missing Resources:")
-            for resource in sorted(missing_resources):
-                print("  * {}".format(resource))
+        results.append((starmap, tiers))
+    return results
 
-        print("")
+def get_reachability_tiers(starmap):
+    return [
+        ("Starting", [starmap.starting_asteroid]),
+        ("Teleport", [starmap.teleport]),
+        ("Short Flight", starmap.short_flight),
+        ("Long Flight", starmap.long_flight),
+    ]
+
+def do_interesting_things():
+    resource_to_tier_to_starmap_names = collections.defaultdict(lambda: ([], [], [], [], []))
+    for starmap, tiers in compute_rsource_reachability():
+        for tier_i, (tier_name, resources) in enumerate(tiers):
+            for resource in resources:
+                resource_to_tier_to_starmap_names[resource][tier_i].append(starmap.starting_asteroid)
+    variability_to_resource = collections.defaultdict(list)
+    for resource, tier_to_starmap_names in resource_to_tier_to_starmap_names.items():
+        variability_to_resource[sum(int(bool(starmap_names)) for starmap_names in tier_to_starmap_names)].append(resource)
+    # Then explore the data i guess.
+    import pdb; pdb.set_trace()
+    print(resource_to_tier_to_starmap_names["Sandstone"])
+
+interesting_resources = {
+    "Gold", "Gold Amalgam", # For Oxylite, Super Coolant, pumping hot oil, etc.
+    "Fossil", "Lime", "Iron Ore", # For Steel
+    "Graphite", "Niobium", "Gas Grass", "Gassy Moo", # Space resources
+    "Crude Oil", # For Plastic
+    "Drecko", # For Plastic and Reed Fiber
+    "Thimble Reed", # For Reed Fiber
+    "Diamond", # For Drill Cone, Monument
+    "Arbor Tree", "Ethanol", # For power
+    "Clay", # For Ceramic
+    "Coal", # For power, Steel, Ceramic, etc.
+    "Wheezewort", "Uranium Ore", # For Applied Sciences Research
+    "Algae", "Oxyfern", "Polluted Dirt", "Polluted Mud", # For Oxygen
+    # Food crops:
+    "Bog Bucket", "Bristle Blossom", "Dusk Cap", "Mealwood", "Nosh Sprout",
+    "Sleet Wheat", "Spindly Grubfruit Plant", "Waterweed",
+    # Food critters:
+    "Hatch", "Pip", "Pokeshell", "Pacu", "Slickster", "Shove Vole",
+    "Plug Slug", "Sweetle",
+}
 
 def do_biome_resources():
     rows = []
@@ -409,6 +501,23 @@ def do_biome_resources():
 |}
 ''This table was generated from [https://github.com/thejoshwolfe/oni-data this script].''
 """, end="")
+
+def vertically_join_cells(rows):
+    for column_i in reversed(range(1, len(rows[0]))):
+        run_start = 0
+        def flush_run(row_i):
+            run_length = row_i - run_start
+            if run_length > 1:
+                rows[run_start][column_i] = "| rowspan=\"{}\" ".format(run_length) + rows[run_start][column_i]
+        for row_i, row in list(enumerate(rows))[1:]:
+            if row[column_i] == rows[run_start][column_i]:
+                # The run continues
+                del row[column_i]
+            else:
+                # The run is done.
+                flush_run(row_i)
+                run_start = row_i
+        flush_run(row_i + 1)
 
 def partition(items, categorize_fn):
     result = collections.defaultdict(list)
