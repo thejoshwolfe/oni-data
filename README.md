@@ -15,3 +15,11 @@ https://oxygennotincluded.fandom.com/wiki/Biome_(Spaced_Out)#Biomes_Contents
 ```
 python3 data.py biome-resources
 ```
+
+### Resource Reachability table
+
+https://oxygennotincluded.fandom.com/wiki/Planetoid_Clusters#Resource_Reachability
+
+```
+python3 data.py resource-reachability
+```
